@@ -11,10 +11,6 @@ type ProtectedRouteProps = {
 export const ProtectedRoute = ({ unAuth, children }: ProtectedRouteProps) => {
   const location = useLocation();
   const isAuthenticated = useSelector((state) => state.auth.success);
-  const isLoading = useSelector((state) => state.auth.loading);
-  if (isLoading) {
-    return <Preloader />;
-  }
 
   if (!isAuthenticated && !unAuth) {
     return <Navigate replace to={'/login'} state={{ from: location }} />;

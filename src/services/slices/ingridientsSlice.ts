@@ -33,14 +33,11 @@ const ingredientsSlice = createSlice({
         state.isIngredientsLoading = false;
         state.error = action.error.message;
       })
-      .addCase(
-        fetchIngredients.fulfilled,
-        (state, action: PayloadAction<TIngredient[]>) => {
-          state.isIngredientsLoading = false;
-          state.error = null;
-          state.ingredients = action.payload;
-        }
-      );
+      .addCase(fetchIngredients.fulfilled, (state, action) => {
+        state.isIngredientsLoading = false;
+        state.error = null;
+        state.ingredients = action.payload.data;
+      });
   }
 });
 

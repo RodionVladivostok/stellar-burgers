@@ -4,7 +4,6 @@ import { BurgerConstructorUI } from '@ui';
 import { useDispatch, useSelector } from '../../services/store';
 import { newUserOrder, setLastOrder } from '../../services/slices/userSlice';
 import { resetConstructor } from '../../services/slices/burgerConstructorSlice';
-import { fetchFeeds } from '../../services/slices/feedsSlice';
 import { useNavigate } from 'react-router-dom';
 
 export const BurgerConstructor: FC = () => {
@@ -35,7 +34,6 @@ export const BurgerConstructor: FC = () => {
 
     dispatch(newUserOrder(ingredientsId));
     dispatch(resetConstructor());
-    dispatch(fetchFeeds());
   };
   const closeOrderModal = () => dispatch(setLastOrder(null));
 

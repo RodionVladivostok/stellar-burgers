@@ -4,14 +4,18 @@ import { TIngredient } from '@utils-types';
 import { useDispatch, useSelector } from '../../services/store';
 import { useParams } from 'react-router-dom';
 import { getOrderByNumber } from '../../services/slices/feedsSlice';
+import { fetchIngredients } from '../../services/slices/ingridientsSlice';
 
 export const OrderInfo: FC = () => {
   const currentNumber = Number(useParams().number);
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getOrderByNumber(currentNumber));
+    dispatch(fetchIngredients());
   }, [dispatch]);
-  const orderData = useSelector((state) => state.feeds.orders[0]);
+
+  const orderData = useSelector((state) => state.feeds.orderByNumber);
 
   const ingredients: TIngredient[] = useSelector(
     (state) => state.ingredients.ingredients

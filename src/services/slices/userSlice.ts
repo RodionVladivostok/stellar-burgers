@@ -7,7 +7,6 @@ import {
   orderBurgerApi,
   registerUserApi,
   TAuthResponse,
-  TRegisterData,
   updateUserApi
 } from '@api';
 import { TOrder } from '@utils-types';
@@ -29,40 +28,27 @@ export const initialState: Pick<TAuthResponse, 'user' | 'success'> & {
   loading: false
 };
 
-export const fetchUser = createAsyncThunk(
-  'user/fetchUser',
-  async () => await getUserApi()
-);
+export const fetchUser = createAsyncThunk('user/fetchUser', getUserApi);
 
-export const login = createAsyncThunk(
-  'user/loginUser',
-  async ({ email, password }: Omit<TRegisterData, 'name'>) =>
-    await loginUserApi({ email, password })
-);
+export const login = createAsyncThunk('user/loginUser', loginUserApi);
 
-export const register = createAsyncThunk(
-  'user/register',
-  async (data: TRegisterData) => await registerUserApi(data)
-);
+export const register = createAsyncThunk('user/register', registerUserApi);
 
 export const updateUser = createAsyncThunk(
   'user/updateUserData',
-  async (user: Partial<TRegisterData>) => await updateUserApi(user)
+  updateUserApi
 );
 
-export const logout = createAsyncThunk(
-  'user/logout',
-  async () => await logoutApi()
-);
+export const logout = createAsyncThunk('user/logout', logoutApi);
 
 export const fetchUserOrders = createAsyncThunk(
-  'user/fecthUserOrders',
+  'user/fetchUserOrders',
   async () => getOrdersApi()
 );
 
 export const newUserOrder = createAsyncThunk(
   'user/newUserOrder',
-  async (data: string[]) => await orderBurgerApi(data)
+  orderBurgerApi
 );
 
 export const userSlice = createSlice({

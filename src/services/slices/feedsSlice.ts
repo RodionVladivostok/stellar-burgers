@@ -9,7 +9,7 @@ export type TFeedsSlice = {
   totalToday: number;
   loadingData: boolean;
   error: string | null | undefined;
-  orderByNumber: { orders: TOrder[] } | null;
+  orderByNumber: TOrder | null;
   success: boolean;
 };
 
@@ -23,14 +23,11 @@ export const initialState: TFeedsSlice = {
   success: false
 };
 
-export const fetchFeeds = createAsyncThunk('feeds/fetchFeeds', async () =>
-  getFeedsApi()
-);
+export const fetchFeeds = createAsyncThunk('feeds/fetchFeeds', getFeedsApi);
 
 export const getOrderByNumber = createAsyncThunk(
   'feeds/getOrderById',
-  async (currentNumber: number) =>
-    getOrderByNumberApi(currentNumber).then((data) => data)
+  getOrderByNumberApi
 );
 
 const feedsSlice = createSlice({
@@ -65,7 +62,7 @@ const feedsSlice = createSlice({
       .addCase(getOrderByNumber.fulfilled, (state, action) => {
         state.loadingData = false;
         state.error = null;
-        state.orderByNumber = action.payload;
+        state.orderByNumber = action.payload.orders[0];
       });
   }
 });

@@ -17,7 +17,6 @@ import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from '../../services/store';
 import { useEffect } from 'react';
 import { fetchIngredients } from '../../services/slices/ingridientsSlice';
-import { fetchFeeds } from '../../services/slices/feedsSlice';
 import { ProtectedRoute } from '../protected-route/ProtectedRoute';
 import { fetchUser, fetchUserOrders } from '../../services/slices/userSlice';
 
@@ -29,9 +28,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(fetchIngredients());
-    dispatch(fetchFeeds());
     dispatch(fetchUser());
-    dispatch(fetchUserOrders);
   }, [dispatch]);
 
   return (
@@ -94,15 +91,14 @@ const App = () => {
           path='/profile/orders/:number'
           element={
             <ProtectedRoute>
-              <Modal
-                title={'Детали заказа'}
-                onClose={() => navigate('/profile/orders')}
-              >
-                <OrderInfo />
-              </Modal>
+              <OrderInfo />
             </ProtectedRoute>
           }
         />
+
+        <Route path='/ingredients/:id' element={<IngredientDetails />} />
+
+        <Route path='/feed/:number' element={<OrderInfo />} />
 
         <Route path='*' element={<NotFound404 />} />
       </Routes>
