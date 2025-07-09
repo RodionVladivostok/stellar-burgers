@@ -1,4 +1,4 @@
-import { TOrder } from '@utils-types';
+import { TOrder, TOrdersData } from '@utils-types';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { getFeedsApi, getOrderByNumberApi } from '@api';
@@ -10,7 +10,6 @@ export type TFeedsSlice = {
   loadingData: boolean;
   error: string | null | undefined;
   orderByNumber: TOrder | null;
-  success: boolean;
 };
 
 export const initialState: TFeedsSlice = {
@@ -19,8 +18,7 @@ export const initialState: TFeedsSlice = {
   totalToday: 0,
   loadingData: true,
   error: null,
-  orderByNumber: null,
-  success: false
+  orderByNumber: null
 };
 
 export const fetchFeeds = createAsyncThunk('feeds/fetchFeeds', getFeedsApi);
