@@ -10,14 +10,14 @@ import { burgerConstructorSliceReducer } from './slices/burgerConstructorSlice';
 import { feedsSliceReducer } from './slices/feedsSlice';
 import { userSliceReducer } from './slices/userSlice';
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
   ingredients: ingredientsSliceReducer,
   constructorItems: burgerConstructorSliceReducer,
   feeds: feedsSliceReducer,
   auth: userSliceReducer
 });
 
-const store = configureStore({
+export const store = configureStore({
   reducer: rootReducer,
   devTools: process.env.NODE_ENV !== 'production'
 });
